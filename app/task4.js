@@ -41,6 +41,26 @@ const getSalary = async (employee) => {
         return salary.salary;
 }
 
+const getFullEmployeeInfo = async (id) => {
+    let employee;
+    let salary;
+    try {
+        employee = await getEmployee(id);
+    } catch (error) {
+        console.log(error.message);
+        return; // Void return to not execute the rest of the code
+    }
+    try {
+        salary = await getSalary(employee);
+    } catch (error) {
+        console.log(error.message);
+        return; // Void return to not execute the rest of the code
+    }
+    
+    console.log(`${employee.name} has salary of ${salary}`);
+}
+
+// getFullEmployeeInfo(11).then(response => console.log(response));
 
 // LEVEL 2
 function dummyFunction() {
@@ -63,5 +83,6 @@ async function callDummyFunction() {
 module.exports = {
     getEmployee,
     getSalary,
+    getFullEmployeeInfo,
     callDummyFunction
 }
