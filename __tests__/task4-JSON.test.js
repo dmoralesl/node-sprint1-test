@@ -1,7 +1,34 @@
-const { getEmployee, getSalary, callDummyFunction } = require('../app/task4');
+const { getEmployee, getSalary, callDummyFunction } = require('../app/task4-JSON');
+
+// Original "Bill Gates" name changed to "Bill Mates" to test mock is working
+jest.mock('../app/task4-data.json', ()=>({
+    employees : [{
+        id: 1,
+        name: 'Linux Torvalds'
+    }, {
+        id: 2,
+        name: 'Bill Mates'
+    },{
+        id: 3,
+        name: 'Jeff Bezos'
+    }],
+     
+    salaries : [{
+        id: 1,
+        salary: 4000
+    }, {
+        id: 2,
+        salary: 1000
+    }, {
+        id: 3,
+        salary: 2000
+    }]
+  }))
+
+
 
 test('getEmployee return an employee when passing a valid ID and fails with non valid ID', () => {
-    getEmployee(2).then(employee => expect(employee.name).toBe('Bill Gates'));
+    getEmployee(2).then(employee => expect(employee.name).toBe('Bill Mates'));
     getEmployee(10).catch(error => expect(error.message).toBe('Employee not found'));
 });
 
